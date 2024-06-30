@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - OnlineShop</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .header-section {
+            background: url('https://i.pinimg.com/564x/f1/ca/4a/f1ca4a2b4143a4ce875b20261bc91a4c.jpg') no-repeat center center;
+            background-size: cover;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        .header-section h1 {
+            font-size: 4rem;
+        }
+        .content-section {
+            padding: 60px 0;
+        }
+        .team-member img {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">OnlineShop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://t.me/nomozov_8">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <h1>About Us</h1>
+    </div>
+
+    <!-- Content Section -->
+    <div class="container content-section">
+        <!-- About Company -->
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Our Company</h2>
+                <p class="text-muted">Welcome to OnlineShop, your number one source for all products like phones, refrigerators, and more. We're dedicated to giving you the very best of electronics, with a focus on dependability, customer service, and uniqueness.</p>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Mission Section -->
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Our Mission</h2>
+                <p class="text-muted">Our mission is to provide high-quality products that combine performance with value pricing while establishing a successful relationship with our customers and suppliers.</p>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Vision Section -->
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Our Vision</h2>
+                <p class="text-muted">Our vision is to be the leading provider of electronics and home appliances, inspiring innovation and creating a sustainable future.</p>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Team Section -->
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Our Team</h2>
+                <p class="text-muted">Meet the team that makes it all happen.</p>
+            </div>
+            <div class="col-lg-4 text-center team-member">
+                <img src="https://avatars.githubusercontent.com/u/169920989?v=4" alt="Team Member" class="img-fluid">
+                <h4>Vohidjon aka</h4>
+                <p class="text-muted">CEO & Founder</p>
+            </div>
+            <div class="col-lg-4 text-center team-member">
+                <img src="https://avatars.githubusercontent.com/u/158210241?v=4" alt="Team Member" class="img-fluid">
+                <h4> Khakimjon  </h4>
+                <p class="text-muted">Chief Marketing Officer</p>
+            </div>
+            <div class="col-lg-4 text-center team-member">
+                <img src="https://avatars.githubusercontent.com/u/169914777?v=4" alt="Team Member" class="img-fluid">
+                <h4>Mirshod</h4>
+                <p class="text-muted">Chief Technology Officer</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
