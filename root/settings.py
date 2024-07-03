@@ -38,6 +38,7 @@ INSTALLED_APPS = ['jet',
                   'django.contrib.messages',
                   'django.contrib.staticfiles',
                   'shop',
+                  'social_django',
                   'django.contrib.sites',
                   "allauth",
                   'allauth.account',
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'root.urls'
@@ -79,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # <-- Here
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -139,10 +143,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'shop/media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = 'login'
+REGISTER_URL = 'register'
+LOGOUT_URL = 'logout'
+SOCIAL_AUTH_FACEBOOK_KEY = '3952545721642937'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'bfb09acafd2514ec44347f90e3c8606e'
 
 AUTH_USER_MODEL = 'shop.CustomUser'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
     'allauth.account.auth_backends.AuthenticationBackend')
 
 LOGIN_REDIRECT_URL = '/'

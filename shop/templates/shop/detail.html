@@ -114,14 +114,27 @@
 
 
                                 <div class="form-group mb-3">
+
                                     <button type="submit" class="btn btn-primary">Send</button>
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                                    </div>
+                                    <div class="text-center">
+                                        <a onclick="return confirm('Are you sure?')" class="btn btn-outline-danger mr-2"
+                                           href="{% url 'delete_product' product.slug %}">Delete Product</a>
+                                        <a class="btn btn-outline-primary"
+                                           href="{% url 'edit_product' product.slug %}">Edit Product</a>
+                                    </div>
+
                                 </div>
                             </form>
 
 
                         </div>
                     </div>
+
                 </div>
+
             </div>
     </section>
     {% if product.comments %}

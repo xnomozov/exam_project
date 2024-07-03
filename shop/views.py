@@ -6,8 +6,14 @@ from shop.models import Product, Category, Comment, CustomUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
+from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
+
+
 def home(request, slug=None):
     categories = Category.objects.all()
     products = Product.objects.all()
@@ -69,7 +75,6 @@ def about(request):
     return render(request, 'shop/about.html')
 
 
-
 def add_product(request):
     form = ProductForm()
     if request.method == 'POST':
@@ -80,7 +85,6 @@ def add_product(request):
             return redirect('home')
 
     return render(request, 'shop/add-product.html', {'form': form})
-
 
 
 def delete_product(request, slug):
@@ -111,7 +115,7 @@ def login_page(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request, email=email, password=password)
             if user:
-                login(request, user)
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                 return redirect('home')
     context = {'form': form}
     return render(request, 'shop/auth/login.html', context)
@@ -139,4 +143,4 @@ def register(request):
             return redirect('home')
     context = {'form': form}
 
-    return render(request, 'shop/auth/register.html', context )
+    return render(request, 'shop/auth/register.html', context)
