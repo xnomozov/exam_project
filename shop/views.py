@@ -40,39 +40,53 @@ def product_detail(request, slug):
     product = Product.objects.get(slug=slug)
     related_products = Product.objects.filter(category=product.category).exclude(slug=product.slug)
     comments = Comment.objects.filter(product__slug=slug)[0:3]
-    comment_form = CommentForm()
-    order_form = OrderForm()
-    new_comment = None  # Comment posted
-    new_order = None
+    count = comments.count()
 
+    return render(request, 'shop/detail.html', {'product': product,
+                                                'comments': comments,
+                                                'count': count,
+                                                'related_products': related_products, })
+
+
+def about(request):
+    return render(request, 'shop/about.html')
+
+
+def add_comment(request, slug):
+    product = Product.objects.get(slug=slug)
+    new_comment = None
+    form = CommentForm()
     if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
-        order_form = OrderForm(data=request.POST)
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
             new_comment.product = product
             new_comment.save()
+            messages.success(request, 'Your comment has been added.')
+            return redirect('product_detail', slug)
+    context = {'product': product, 'comment_form': form, 'new_comment': new_comment}
+    return render(request, 'shop/detail.html', context)
 
-        elif order_form.is_valid():
-            new_order = order_form.save(commit=False)
+
+def add_order(request, slug):
+    new_order = None
+    product = Product.objects.get(slug=slug)
+    form = OrderForm()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            new_order = form.save(commit=False)
             new_order.product = product
             new_order.save()
             messages.add_message(
                 request,
                 messages.SUCCESS,
                 'Product successfully ordered'
+
             )
-    return render(request, 'shop/detail.html', {'product': product,
-                                                'comments': comments,
-                                                'new_comment': new_comment,
-                                                'comment_form': comment_form,
-                                                'new_order': new_order,
-                                                'order_form': order_form,
-                                                'related_products': related_products, })
-
-
-def about(request):
-    return render(request, 'shop/about.html')
+            return redirect('product_detail', slug)
+    context = {'form': form, new_order: new_order}
+    return render(request, 'shop/detail.html', context)
 
 
 def add_product(request):
@@ -139,7 +153,7 @@ def register(request):
             user.is_active = True
             user.is_staff = True
             user.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
     context = {'form': form}
 

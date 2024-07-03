@@ -36,30 +36,29 @@
                     <button type="submit" class="btn btn-danger">Logout</button>
                 </form>
             {% else %}
-                <div class="d-flex justify-content-end">
-                    <!-- Dropdown for authentication -->
-                    <div class="dropdown me-2">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="authDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                            Authentication
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="authDropdown">
-                            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-                            <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
-                        </ul>
-                    </div>
+                <div class="d-flex justify-content-end align-items-center">
+                <!-- Dropdown for authentication -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="authDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Authentication
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="authDropdown">
+                        <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                        <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                    </ul>
                 </div>
             {% endif %}
 
-            <div class="d-flex justify-content-end">
-                <form class="d-flex ms-auto">
-                    <input type="text" name="search" class="form-control" placeholder="Search product">
-                    <button class="btn btn-outline-primary" type="submit">
-                        <i class="bi-search-fill me-1"></i>
-                        Search
-                    </button>
-                </form>
+            <!-- Search form -->
+            <form class="d-flex">
+                <input type="text" name="search" class="form-control me-2" placeholder="Search product">
+                <button class="btn btn-outline-primary" type="submit">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </form>
             </div>
+
 
         </div>
     </div>

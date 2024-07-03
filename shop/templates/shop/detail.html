@@ -29,19 +29,39 @@
 
     <!-- Product section-->
     <section class="py-5">
-        <div>
-            <h3>
-
-                {% if messages %}
-                    <ul align="center">
-                        {% for message in messages %}
-                            <li style="color:green" {% if message.tags %}
-                                class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </h3>
+    <div id="message-container" class="text-center">
+    {% if messages %}
+        <div class="alert alert-success" role="alert">
+            <ul class="list-unstyled">
+                {% for message in messages %}
+                    <li class="{% if message.tags %}alert alert-{{ message.tags }}{% else %}alert-success{% endif %}">
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
+    {% endif %}
+</div>
+
+<script>
+    // Function to remove the message container after a certain time
+    function hideMessage() {
+        const messageContainer = document.getElementById('message-container');
+        if (messageContainer) {
+            setTimeout(() => {
+                messageContainer.style.transition = "opacity 0.5s ease";
+                messageContainer.style.opacity = 0;
+                setTimeout(() => {
+                    messageContainer.remove();
+                }, 500); // Wait for the fade-out transition to complete before removing the element
+            }, 5000); // Change this value to the desired duration in milliseconds
+        }
+    }
+
+    // Call the function to hide the message
+    hideMessage();
+</script>
+
         {% if form.errors %}
             {% for field in form %}
                 {% for error in field.errors %}
@@ -93,7 +113,7 @@
 
                         <p class="lead">{{ product.description }}</p>
                         <div class="d-flex">
-                            <form method="post" action="">
+                            <form method="post" action="{% url 'add_order' product.slug %}">
                                 {% csrf_token %}
 
                                 <div class="form-group">
@@ -119,12 +139,15 @@
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 
                                     </div>
-                                    <div class="text-center">
-                                        <a onclick="return confirm('Are you sure?')" class="btn btn-outline-danger mr-2"
-                                           href="{% url 'delete_product' product.slug %}">Delete Product</a>
-                                        <a class="btn btn-outline-primary"
-                                           href="{% url 'edit_product' product.slug %}">Edit Product</a>
-                                    </div>
+                                    {% if user.is_authenticated %}
+                                        <div class="text-center">
+                                            <a onclick="return confirm('Are you sure?')"
+                                               class="btn btn-outline-danger mr-2"
+                                               href="{% url 'delete_product' product.slug %}">Delete Product</a>
+                                            <a class="btn btn-outline-primary"
+                                               href="{% url 'edit_product' product.slug %}">Edit Product</a>
+                                        </div>
+                                    {% endif %}
 
                                 </div>
                             </form>
@@ -167,7 +190,7 @@
                 <h3>Add Comment</h3>
             </div>
 
-            <form method="post" style="margin-top: 1.3em;">
+            <form method="post" style="margin-top: 1.3em;" action="{% url 'add_comment' product.slug %}">
                 {% csrf_token %}
 
                 <div class="form-group mb-3">

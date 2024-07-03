@@ -35,6 +35,8 @@
             </div>
         </div>
     </header>
+
+
     <!-- Section-->
     <div class="container mt-5">
         {% if form.errors %}
@@ -51,22 +53,54 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <div class="text-left">
-            <h3>Filter by</h3>
+        <div id="message-container" class="text-center">
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    <ul class="list-unstyled">
+                        {% for message in messages %}
+                            <li class="{% if message.tags %}alert alert-
+                            {{ message.tags }}{% else %}alert-success{% endif %}">
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
         </div>
-        <div class="row">
-            <div class="col-1">
-                <a class="btn btn-outline-dark mt-auto" href="?expensive=true"> Expensive </a>
-            </div>
-            <div class="col-1">
-                <a class="btn btn-outline-dark mt-auto" href="?cheap=true"> Cheap </a>
-            </div>
-        </div>
+
+        <script>
+            // Function to remove the message container after a certain time
+            function hideMessage() {
+                const messageContainer = document.getElementById('message-container');
+                if (messageContainer) {
+                    setTimeout(() => {
+                        messageContainer.style.transition = "opacity 0.5s ease";
+                        messageContainer.style.opacity = 0;
+                        setTimeout(() => {
+                            messageContainer.remove();
+                        }, 200); // Wait for the fade-out transition to complete before removing the element
+                    }, 5000); // Change this value to the desired duration in milliseconds
+                }
+            }
+
+            // Call the function to hide the message
+            hideMessage();
+        </script>
+
     </div>
 
+    <div class="text-left">
+        <h3>Filter by</h3>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <a class="btn btn-outline-dark mb-2 me-2" href="?expensive=true">Expensive</a>
+            <a class="btn btn-outline-dark mb-2" href="?cheap=true">Cheap</a>
+        </div>
+    </div>
+    
 
-    </div>
-    </div>
+    
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
