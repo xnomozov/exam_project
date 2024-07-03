@@ -25,6 +25,9 @@ class Category(models.Model):
 class Product(models.Model):
     class Meta:
         ordering = ['-created_at']
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
 
     class RatingChoices(models.IntegerChoices):
         zero = 0
@@ -45,6 +48,9 @@ class Product(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='products')
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -63,8 +69,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-
 
 
 class Order(models.Model):
@@ -102,5 +106,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
-

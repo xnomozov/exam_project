@@ -21,7 +21,7 @@ from root import settings
 
 urlpatterns = [
                   path('jet/', include('jet.urls', 'jet')),
-                  path(r'jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+                  path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
 
                   path('admin/', admin.site.urls),
                   path('', include('shop.urls')),

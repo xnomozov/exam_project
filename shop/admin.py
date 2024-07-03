@@ -26,8 +26,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('title',)
 
     # prepopulated_fields = {'slug': ('title',)}
-    class Media:
-        verbose_name = 'categories'
+
 
 
 @admin.register(Comment)

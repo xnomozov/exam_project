@@ -47,7 +47,7 @@ INSTALLED_APPS = ['jet',
 JET_DEFAULT_THEME = 'green'
 
 JET_SIDE_MENU_COMPACT = True
-JET_INDEX_DASHBOARD = 'shop/dashboard.CustomIndexDashboard'
+
 SOCIALACCOUNT_PROVIDERS = {'google': {
     'SCOPE': ['email',
               'profile'],
