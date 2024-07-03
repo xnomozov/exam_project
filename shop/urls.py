@@ -1,11 +1,18 @@
 from django.contrib import admin
 from django.urls import path
-from shop.views import home, details, product_of_category, about, comment_add
+from shop.views import home, product_detail, about, add_product, delete_product, edit_product, login_page, logout_page,register
 
 urlpatterns = [
     path('', home, name='home'),
-    path('product/<int:product_id>/', details, name='product_detail'),
-    path('category/<int:category_id>/', product_of_category, name='category'),
+    path('product/<slug:slug>', product_detail, name='product_detail'),
+    path('category/<slug:slug>/products', home, name='category_products'),
     path('about', about, name='about'),
-    path('comments/<int:prosuct_id>', comment_add, name='comments' )
+    path('add-product', add_product, name='add_product'),
+    path('delete/<slug:slug>', delete_product, name='delete_product'),
+    path('product/<slug:slug>/edit', edit_product, name='edit_product'),
+    path('login', login_page, name='login'),
+    path('logout', logout_page, name='logout'),
+    path('register', register, name='register'),
+
+
 ]
